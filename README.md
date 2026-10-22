@@ -12,7 +12,10 @@ Requires Visual Studio 2022 (C++ workload) and CMake 3.20+. OpenXR headers are d
     powershell -ExecutionPolicy Bypass -File scripts\build.ps1
     powershell -ExecutionPolicy Bypass -File scripts\register.ps1
 
-`scripts\unregister.ps1` removes it. Set `DISABLE_XR_APILAYER_S16N_CA_FIX=1` to skip it for one launch.
+This registers per-user (HKCU, no admin). Add `-Machine` to register for all users under HKLM
+instead; it prompts for elevation, and layer managers such as OpenXR-API-Layers-GUI list it there.
+
+`scripts\unregister.ps1` removes it (`-Machine` for the HKLM entry). Set `DISABLE_XR_APILAYER_S16N_CA_FIX=1` to skip it for one launch.
 
 ## Logs
 `%LOCALAPPDATA%\openxr-ca-fix\layer-<game exe>.log`, overwritten each run.
