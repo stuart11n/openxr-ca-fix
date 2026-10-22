@@ -18,6 +18,7 @@ FetchContent_MakeAvailable(openxr_sdk)
 add_library(${LAYER_NAME} SHARED
   src/layer.cpp
   src/log.cpp
+  src/d3d12_copier.cpp
   src/layer.def)
 target_include_directories(${LAYER_NAME} PRIVATE ${openxr_sdk_SOURCE_DIR}/include)
 target_compile_definitions(${LAYER_NAME} PRIVATE

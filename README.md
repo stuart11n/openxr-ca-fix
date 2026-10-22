@@ -4,7 +4,10 @@ OpenXR API layer that reduces residual lateral chromatic aberration at the lens 
 (Pimax Crystal Light, Pimax OpenXR runtime, DX12 games).
 
 ## Status
-Step 1: pass-through layer that logs `xrEndFrame` and `xrCreateSession`.
+Step 2: captures the game's D3D12 device and queue, and for each colour swapchain in a
+projection layer copies the released image into a layer-owned swapchain, which is what
+gets submitted. The image should look identical to no layer. Depth and quad layers pass
+through untouched; any failure falls back to submitting the app's swapchain.
 
 ## Build
 Requires Visual Studio 2022 (C++ workload) and CMake 3.20+. OpenXR headers are downloaded at configure time.
