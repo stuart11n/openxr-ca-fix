@@ -19,7 +19,8 @@ if ($Machine) {
 } else {
     $key = "HKCU:\SOFTWARE\Khronos\OpenXR\1\ApiLayers\Implicit"
 }
-New-Item -Path $key -Force | Out-Null
+# Only create the key if missing: New-Item -Force on an existing key wipes its values.
+if (-not (Test-Path $key)) { New-Item -Path $key -Force | Out-Null }
 # Value name is the manifest path; DWORD 0 means enabled.
 New-ItemProperty -Path $key -Name $manifest -PropertyType DWord -Value 0 -Force | Out-Null
 Write-Host "Registered $manifest under $key"
